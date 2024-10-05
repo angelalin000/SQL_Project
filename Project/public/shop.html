@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐廳介面</title>
+    <link rel="stylesheet" href="./stylesheets/styleRestaurant.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div class="websiteTitle">
+    <h1>店家您好 歡迎來到吱吱點餐</h1>
+</div>
+
+<form id="shop" action="http://localhost:3000/shop" method="post">
+    <label for="shop_name">餐廳：</label>
+    <input type="varchar" id="shop_name" name="shop_name">
+    <label for="meals">餐點：</label>
+    <input type="varchar" id="meals" name="meals">
+    <label for="meals_value">單價：</label>
+    <input type="int" id="meals_value" name="meals_value">
+    <button type="submit" class="login" onclick="click_login()">上傳餐點</button>
+</form>
+
+<div id="app">
+    <div id="search_shop">
+        <label for="shopName">店家名稱：</label>
+        <input type="text" id="shopName" name="shopName">
+        <button class="showBtn" v-on:click="handleClick">顯示訂單</button>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>訂單內容</th>
+            <th>下單時間</th>
+            <th>預計時間</th>
+            <th>總價</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in data">
+            <td>{{ item.serial_number }}</td>
+            <td>{{ item.client_orders }}</td>
+            <td>{{ item.ofood_time }}</td>
+            <td>{{ item.gfood_time }}</td>
+            <td>{{ item.total }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                data: []
+            };
+        },
+        methods: {
+            async handleClick() {
+                console.log("data");
+                var shop = document.getElementById("shopName").value;
+                const url = `http://localhost:3000/shop?param1=${shop}`; // 資料傳送到的 URL
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                    });
+                    const res_data = await response.json();
+                    this.data = res_data;
+                    console.log("成功", res_data);
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        }
+    });
+
+    app.mount('#app');
+</script>
+
+
+</body>
+</html>

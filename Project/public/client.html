@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客戶點餐介面</title>
+    <link rel="stylesheet" href="./stylesheets/styleClient.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div class="websiteTitle">
+    <h1>客戶您好 歡迎來到吱吱點餐</h1>
+</div>
+
+<div class="orderArea" id="app">
+    <div class="searchShop">
+        <input type="text" id="shop_name" name="shop_name" placeholder=" 請輸入餐廳">
+        <button class='showBtn' v-on:click="handleClick">查詢</button>
+    </div>
+
+    <table class="menuTable">
+        <thead>
+        <tr>
+            <th>數量</th>
+            <th>品項</th>
+            <th>單價</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in data">
+            <td><input type="text" name="quantity" v-model="item.quantity" class="enterQuantity"></td>
+            <td>{{ item.meals }}</td>
+            <td>{{ item.meals_value }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="checkOrder">
+        <p>總餐點： {{ clientOrders }}</p>
+        <p>總價： {{ calculateTotal }}</p>
+    </div>
+    <!--<label>地址</label>-->
+    <input type="text" id="destination" name="destination" placeholder=" 請輸入外送地址">
+    <input type="text" id="phone" name="phone" placeholder=" 請輸入電話號碼">
+    <button type="submit" class="order" v-on:click="handleClick2">確認送出</button>
+</div>
+
+<div class="orderList" id="app1">
+    <button class="showOrder" v-on:click="handleClick">顯示訂單</button>
+    <table>
+        <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>訂單內容</th>
+            <th>下單時間</th>
+            <th>預計時間</th>
+            <th>總價</th>
+            <th>店家名稱</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in data">
+            <td>{{ item.serial_number }}</td>
+            <td>{{ item.client_orders }}</td>
+            <td>{{ item.ofood_time }}</td>
+            <td>{{ item.gfood_time }}</td>
+            <td>{{ item.total }}</td>
+            <td>{{ item.shop_name }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                data: [],
+            };
+        },
+        methods: {
+            async handleClick2() {
+
+                const postData = {
+                    client_orders: this.clientOrders,
+                    total: this.calculateTotal,
+                    destination: document.getElementById("destination").value,
+                    shop_name: document.getElementById("shop_name").value,
+                    phone: document.getElementById("phone").value
+                };
+
+                try {
+                    const response = await fetch('http://localhost:3000/menu', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(postData)
+                    });
+
+                    const res_data = await response.json();
+                    this.corders = res_data;
+                    console.log("成功", res_data);
+                } catch (error) {
+                    console.log('錯誤', error);
+                }
+                this.data.forEach(item => {
+                    item.quantity = "";
+                });
+                this.clientOrders = "";
+                this.destination = "";
+                this.phone = "";
+
+            },
+            async handleClick() {
+                console.log("data");
+                var name = document.getElementById("shop_name").value;
+                const url = `http://localhost:3000/menu?param1=${name}`; // 資料傳送到的 URL
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+
+                    });
+                    const res_data = await response.json();
+                    this.data = res_data;
+                    console.log("成功", res_data);
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        },
+        computed: {
+            calculateTotal() {
+                let total = 0;
+                for (let i = 0; i < this.data.length; i++) {
+                    var q = this.data[i].quantity
+                    if (q == null) {
+                        q = 0;
+                    }
+                    total += this.data[i].meals_value * q;
+                }
+                return total;
+            },
+            clientOrders() {
+                let corders = "";
+                for (let i = 0; i < this.data.length; i++) {
+                    var m = this.data[i].meals
+                    var q = this.data[i].quantity
+                    if (q == null || q == "") {
+                        continue;
+                    }
+                    corders = corders + m + "*" + q + ",";
+                }
+                return corders;
+            }
+        }
+    });
+    app.mount('#app');
+
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                data: []
+            };
+        },
+        methods: {
+            async handleClick() {
+                console.log("data");
+                const url = "http://localhost:3000/deliveryManOut"; // 資料傳送到的 URL
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+
+                    });
+                    const res_data = await response.json();
+                    this.data = res_data;
+                    console.log("成功", res_data);
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        }
+    });
+    app1.mount('#app1');
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外送員註冊</title>
+    <link rel="stylesheet" href="./stylesheets/styleDeliveryManSignup.css">
+</head>
+<body>
+
+<div class="websiteTitle">
+    <h1>外送員註冊</h1>
+</div>
+
+<div class="mainArea">
+    <form id="deliveryMan" action="http://localhost:3000/deliveryMan" method="post">
+        <label for="delivery_name">外送員名稱</label>
+        <input placeholder=" 外送員名稱" autocapitalize="off" spellcheck="false" type="varchar" id="delivery_name"
+               name="delivery_name">
+        <label for="phone_number">外送員電話</label>
+        <input placeholder=" 外送員電話" autocapitalize="off" spellcheck="false" type="char" id="phone_number"
+               name="phone_number">
+        <label for="email">電子郵件帳號</label>
+        <input placeholder=" 電子郵件帳號" autocapitalize="off" spellcheck="false" type="varchar" id="email"
+               name="email">
+        <label for="password">密碼</label>
+        <input type="password" placeholder=" 密碼" type="varchar" id="password" name="password">
+        <button type="submit" class="login" onclick="click_login()">註冊</button>
+    </form>
+</div>
+</body>
+</html>

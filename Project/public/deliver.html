@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外送員接單介面</title>
+    <link rel="stylesheet" href="./stylesheets/styleDeliver.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div class="websiteTitle">
+    <h1>外送員您好 歡迎來到吱吱點餐</h1>
+</div>
+
+<div class="input" id="app1">
+    <button type="submit" class="showBtn" v-on:click="handleClick">顯示所有訂單</button>
+    <table class="showAllOrders">
+        <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>訂單內容</th>
+            <th>預計時間</th>
+            <th>總價</th>
+            <th>店家地址</th>
+            <th>目的地</th>
+            <th>客人電話</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in data">
+            <td>{{ item.serial_number }}</td>
+            <td>{{ item.client_orders }}</td>
+            <td>{{ item.gfood_time }}</td>
+            <td>{{ item.total }}</td>
+            <td>{{ item.adress }}</td>
+            <td>{{ item.destination }}</td>
+            <td>{{ item.phone }}</td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="received" id="app">
+    <div class="catch">
+        <label for="serialNumber" class="city">訂單編號：</label>
+        <input type="text" id="serialNumber" name="serialNumber">
+        <button type="submit" class="submitBtn" v-on:click="handleClick">接單</button>
+    </div>
+    <table class="showAllOrders">
+        <thead>
+        <tr>
+            <th>訂單編號</th>
+            <th>訂單內容</th>
+            <th>預計時間</th>
+            <th>總價</th>
+            <th>店家地址</th>
+            <th>目的地</th>
+            <th>客人電話</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in data">
+            <td>{{ item.serial_number }}</td>
+            <td>{{ item.client_orders }}</td>
+            <td>{{ item.gfood_time }}</td>
+            <td>{{ item.total }}</td>
+            <td>{{ item.adress }}</td>
+            <td>{{ item.destination }}</td>
+            <td>{{ item.phone }}</td>
+        </tr>
+        </tbody>
+        <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                data: []
+            };
+        },
+        methods: {
+            async handleClick() {
+                console.log("data");
+                var id = document.getElementById("serialNumber").value;
+                const url = `http://localhost:3000/deliveryManOut2?param1=${id}`; // 資料傳送到的 URL
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+
+                    });
+                    const res_data = await response.json();
+                    this.data = res_data ;
+                    console.log("成功", res_data );
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        }
+    });
+
+    app.mount('#app');
+    const app1 = Vue.createApp({
+        data() {
+            return {
+                data: []
+            };
+        },
+        methods: {
+            async handleClick() {
+                console.log("data");
+                const url = "http://localhost:3000/deliveryManOut"; // 資料傳送到的 URL
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+
+                    });
+                    const res_data = await response.json();
+                    this.data = res_data ;
+                    console.log("成功", res_data );
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        }
+    });
+
+    app1.mount('#app1');
+</script>
+</body>
+</html>

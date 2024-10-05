@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐廳登入</title>
+    <link rel="stylesheet" href="./stylesheets/styleRestaurantLogin.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+<div class="websiteTitle">
+    <h1 class="mdLogo01Img">餐廳登入</h1>
+</div>
+
+<div class="mainArea">
+    <div id="app">
+        <label>電子郵件帳號</label>
+        <input type="text" placeholder=" 電子郵件帳號" autocapitalize="off" spellcheck="false" name="email" id="email">
+        <label>密碼</label>
+        <input type="text" placeholder=" 密碼" name="password" id="password">
+        <button type="submit" class="login" v-on:click="handleClick">登入</button>
+        <p class="message" v-if="errorMessage">{{ errorMessage }}</p>
+    </div>
+</div>
+
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                data: [],
+                errorMessage: ""
+            };
+        },
+        methods: {
+            async handleClick() {
+                var email = document.getElementById("email").value;
+                var password = document.getElementById("password").value;
+                const url = `http://localhost:3000/restaurant?param1=${email}&param2=${password}`;
+                try {
+                    const response = await fetch(url, {
+                        method: 'GET',
+                    });
+                    if (response.ok) {
+                        const res_data = await response.json();
+                        if (res_data.message === "查不到資料") {
+                            // 在網頁上設置 errorMessage 屬性為「查不到資料」
+                            this.errorMessage = "無法登入";
+                        } else {
+                            this.errorMessage = "登入成功";
+                            setTimeout("location.href='http://localhost:3000/shop.html'");
+                            this.data = res_data;
+                            console.log("成功", res_data);
+                        }
+                    }
+
+                } catch (error) {
+                    console.log("錯誤", error);
+                }
+            }
+        }
+    });
+
+    app.mount('#app');
+</script>
+</body>
+</html>

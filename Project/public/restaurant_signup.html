@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>餐廳註冊</title>
+    <link rel="stylesheet" href="./stylesheets/styleRestaurantSignup.css">
+</head>
+<body>
+
+<div class="websiteTitle">
+    <h1 class="mdLogo01Img">餐廳註冊</h1>
+</div>
+
+<div class="mainArea">
+    <form id="restaurant" action="http://localhost:3000/restaurant" method="post">
+        <label for="shop_name">餐廳名稱</label>
+        <input placeholder=" 餐廳名稱" autocapitalize="off" spellcheck="false" type="shop_name" id="shop_name"
+               name="shop_name">
+        <label for="phone_number">餐廳電話</label>
+        <input placeholder=" 餐廳電話" autocapitalize="off" spellcheck="false" type="char" id="phone_number"
+               name="phone_number">
+        <label for="email">電子郵件帳號</label>
+        <input placeholder=" 電子郵件帳號" autocapitalize="off" spellcheck="false" type="varchar" id="email"
+               name="email">
+        <label for="password">密碼</label>
+        <input type="password" placeholder=" 密碼" type="varchar" id="password" name="password">
+        <label for="adress">餐廳地址</label>
+        <input placeholder=" 餐廳地址" autocapitalize="off" spellcheck="false" type="varchar" id="adress" name="adress">
+        <button type="submit" class="login" onclick="click_login()">註冊</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+body {
+    zoom: 1;
+    margin:0px;
+    padding:0px;
+    background:#fff url("mouse.jpg") center center fixed no-repeat;
+    background-size: 1500px 800px;
+
+    letter-spacing: .01em;
+    font-family: DFKai-SB;
+}
+
+.websiteTitle {
+    /*版面配置*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    width: 200px;
+    height: 70px;
+
+    /*物件設計*/
+    background-color: #43A49B;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+    /*文字*/
+    color: white;
+    text-align: center;
+}
+
+.mainArea {
+    /*版面配置*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+#app {
+    /*版面配置*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 50%;
+    height: 500px;
+
+    /*物件設計*/
+    background-color: #43A49B;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+label {
+    /*版面配置*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    /*物件設計*/
+    border-radius: 20px;
+
+    /*文字*/
+    color: white;
+    font-size: 20px;
+    font-family: DFKai-SB;
+}
+
+input {
+    /*版面配置*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 80%;
+    height: 30px;
+
+    /*物件設計*/
+    border: none;
+    border-radius: 20px;
+
+    /*文字*/
+    font-size: 16px;
+    font-family: DFKai-SB;
+}
+
+.login {
+    /*版面配置*/
+    margin-top: 20px;
+    margin-bottom: 5px;
+    width: 40%;
+    height: 50px;
+
+    /*物件設計*/
+    border: none;
+    border-radius: 15px;
+    background-color: #929292;
+
+    /*文字*/
+    color: white;
+    font-size: 20px;
+    font-family: DFKai-SB;
+}
+
+.message {
+    /*版面配置*/
+    margin-top: 20px;
+    margin-bottom: 5px;
+
+    /*文字*/
+    color: white;
+    font-size: 20px;
+    font-family: DFKai-SB;
+    text-align: center;
+}

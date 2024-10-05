@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>客戶註冊</title>
+    <link rel="stylesheet" href="./stylesheets/styleClientSignup.css">
+</head>
+<body>
+
+<div class="websiteTitle">
+    <h1>客戶註冊</h1>
+</div>
+
+<div class="mainArea">
+    <form id="client" action="http://localhost:3000/client" method="post">
+        <label for="client_name">客戶名稱</label>
+        <input placeholder=" 客戶名稱" autocapitalize="off" spellcheck="false" type="varchar" id="client_name"
+               name="client_name">
+        <label for="phone_number">客戶電話</label>
+        <input placeholder=" 客戶電話" autocapitalize="off" spellcheck="false" type="char" id="phone_number"
+               name="phone_number">
+        <label for="email">電子郵件帳號</label>
+        <input placeholder=" 電子郵件帳號" autocapitalize="off" spellcheck="false" type="varchar" id="email"
+               name="email">
+        <label for="password">密碼</label>
+        <input type="password" placeholder=" 密碼" type="varchar" id="password" name="password">
+        <button type="submit" class="login" onclick="click_login()">註冊</button>
+    </form>
+</div>
+</body>
+</html>

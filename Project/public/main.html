@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>吱吱點餐外送平台</title>
+    <link rel="icon" type="image/x-icon" sizes="80x80" href="mouse-icon.jpg">
+    <link rel="stylesheet" href="./stylesheets/styleMain.css">
+</head>
+
+<body>
+<div class="websiteTitle">
+    <h1>吱吱點餐</h1>
+</div>
+<div class="area1">
+    <div class="signup">
+        <p>會員註冊</p>
+        <button id="shopSignup">餐廳</button>
+        <button id="clientSignup">顧客</button>
+        <button id="deliverSignup">外送員</button>
+    </div>
+    <div class="login">
+        <p>會員登入</p>
+        <button id="shopLogin">餐廳</button>
+        <button id="clientLogin">顧客</button>
+        <button id="deliverLogin">外送員</button>
+    </div>
+</div>
+</body>
+<script>
+    var button1 = document.getElementById("shopSignup");
+    var button2 = document.getElementById("clientSignup");
+    var button3 = document.getElementById("deliverSignup");
+    var button4 = document.getElementById("shopLogin");
+    var button5 = document.getElementById("clientLogin");
+    var button6 = document.getElementById("deliverLogin");
+
+    button1.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/restaurant_signup.html'");
+    });
+    button2.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/client_signup.html'");
+    });
+    button3.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/deliveryMan_signup.html'");
+    });
+    button4.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/Restaurant_login.html'");
+    });
+    button5.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/Client_login.html'");
+    });
+    button6.addEventListener("click", function() {
+        setTimeout("location.href='http://localhost:3000/DeliveryMan_login.html'");
+    });
+</script>
+</html>
